@@ -11,20 +11,26 @@ var elTemplateTodo = $_('#todo-template').content;
 elForm.addEventListener('submit', (evt) => {
 	evt.preventDefault();
 
+	var newId = 0;
+	savedTodos.forEach((todo) => {
+		newId++
+	});
+
 	if(elTodoInput.value.length > 5) {
 		var tempTodo = {
+			id: (newId + 1).toString(),
 			todo: elTodoInput.value,
 			isCompleted: false
 		};
 
 		// push the todo to the savedTodos
 		savedTodos.push(tempTodo);
+	console.log(savedTodos);
 	} else {
 		alert(`Ko'proq yozing!`)
 	}
 
 	localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
-	console.log(savedTodos);
 
 	elTodoInput.value = '';
 	elTodoInput.focus();
@@ -40,6 +46,7 @@ var renderTodos = function(todosArray) {
 		var newTodoTemplate = elTemplateTodo.cloneNode(true);
 
 		newTodoTemplate.querySelector('.js-todo__text').textContent = todo.todo;
+		newTodoTemplate.querySelector('.js-todo__remove').dataset.id = todo.id;
 
 		newFragmentBox.append(newTodoTemplate);		
 	});
@@ -50,5 +57,14 @@ var renderTodos = function(todosArray) {
 renderTodos(savedTodos);
 
 elTodos.addEventListener('click', (evt) => {
-	// console.log(evt.target.match)
+	// remove todo
+	if(evt.target.matches('.js-todo__remove')) {
+		var foundTodo = savedTodos.find((todo) => {
+			if(todo.id === evt.target.dataset.id) {
+				return todo;
+			}
+		});
+
+		console.log(foundTodo)
+	}
 });
