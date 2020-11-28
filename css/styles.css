@@ -1,0 +1,165 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", "Arial", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.messages__form {
+	padding: 1em;
+}
+
+.messages__list {
+	/*max-height: 86vh;*/
+	/*overflow-y: auto;*/
+}
+
+.messages__heading {
+	max-width: 180px;
+}
+
+.messages__text {
+	max-width: 210px;
+}
+
+.sitebody__inner {
+	cursor: pointer;
+}
+
+.modal__more.navbar__button {
+	margin-left: auto;
+}
+
+.close.modal__close {
+	margin-left: 0;
+}
+
+.navbar__button {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: contain;
+}
+.navbar__button--search {
+  background-image: url("../img/icon-search.svg");
+}
+.navbar__button--more {
+  background-image: url("../img/icon-more.svg");
+}
+.navbar__button--expand {
+  background-image: url("../img/icon-expand.svg");
+}
+
+.msg__file {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: transparent;
+  border: none;
+  background-image: url("../img/icon-attach.svg");
+}
+.msg__file--mic {
+  background-image: url("../img/icon-mic.svg");
+}
+
+.msg__form-group input {
+  border: none;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.emoji {
+  display: flex;
+  flex-direction: column;
+  padding-right: 0;
+}
+
+.emoji__list {
+  margin-bottom: 20px;
+}
+
+.emoji__link {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #495057;
+}
+
+.emoji__link.active {
+  color: #007bff !important;
+}
+
+.emoji__inner {
+  max-height: 90vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.emoji__box {
+  padding-left: 10px;
+  margin-bottom: 25px;
+}
+
+.emoji__icon {
+  padding: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sitebody__bottom {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: var(--light);
+}
+
+/*modal*/
+.icon-bg::before {
+	content: "";
+	width: 24px;
+	height: 24px;
+	margin-right: 10px;
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+
+.modal__desc {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center !important;
+}
+
+.modal__desc::before {
+	background-image: url("../img/icon-info.svg");
+}
+
