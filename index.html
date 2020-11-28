@@ -5,10 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todoist</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+	<div class="container">
+		<div class="nav bg-orange-self p-4 rounded mt-2">
+			<h1 class="h3 text-white mb-0">Todoist</h1>
+		</div> <!-- End of nav -->
+
+		<form class="form form-inline mt-3 flex-nowrap" method="POST" action="https://echo.htmlacademy.ru">
+			<input class="form-control flex-grow-1 js-input" type="text" placeholder="What needs to be done?" required name="todo" aria-label="Create todo">
+			<button class="btn btn-orange-self ml-3" type="submit">Submit</button>
+		</form> <!-- End of form -->
+
+		<div class="todos-wrapper d-flex justify-content-center">
+			<ul class="list-group mt-3 w-50  font-weight-normal text-body js-todos">
+
+			</ul> <!-- End of todo list -->
+		</div><!-- End of todos-wrapper -->
+	</div><!-- End of container -->
+
+	<template id="todo-template">
+		<li class="list-group-item js-todo d-flex align-items-center">
+	    <input class="js-todo__check" type="checkbox" aria-label="Checkbox for following text input">
+	  	<span class="js-todo__text flex-grow-1 text-truncate mx-2">Lorem ipsum, dolor sit amet con</span>
+	  	<button class="btn btn-orange-self btn-sm js-remove" type="button">X</button>
+	  </li>
+	</template><!-- End of #todo-template -->
 	
+	<script src="js/utils.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 </html>
