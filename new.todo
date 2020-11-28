@@ -1,0 +1,21 @@
+Psevdo kod:
+  1. forma va input, button buladi
+  2. pastida ul>li>checkbox, span, button Xli buladi
+  3. ul scrollli buladi
+  4. ulning ostida filtrli joyi buladi
+  5. filterda -> All, Active, Completed, todolar sanog'i ham
+
+  JS:
+    1. formani tanlaymiz, uning ichidagi el larni chaqiramiz
+    2. li ning templateni yaratamiz
+    3. olgan qiymatimizni localStoragega joylaymiz -> bitta array buladi uning ichida JSON ->
+        [
+          {
+            todo: 'sdcddscdsds',
+            isCompleted: false
+          },
+          {
+
+          }
+        ] kurinishida
+    4. all done tugmasi
