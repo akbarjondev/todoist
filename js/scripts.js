@@ -84,6 +84,7 @@ elTodos.addEventListener('click', (evt) => {
 			if(todo.id == evt.target.previousElementSibling.dataset.id) {
 				todo.isCompleted ? todo.isCompleted = false : todo.isCompleted = true;
 
+				// save Updated todos
 				localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
 			}
 		});
