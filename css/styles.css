@@ -12,7 +12,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: "Fredoka One", "Arial", sans-serif;
+  font-family: "Quicksand", "Arial", sans-serif;
 }
 
 img {
@@ -23,4 +23,9 @@ img {
 .bg-orange-self, .btn-orange-self {
   background-color: #fd7e14;
   color: #ffffff;
+}
+
+.is-done {
+  text-decoration: line-through;
+  opacity: 0.5;
 }
