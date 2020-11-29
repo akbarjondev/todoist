@@ -25,7 +25,7 @@ elForm.addEventListener('submit', (evt) => {
 
 		// push the todo to the savedTodos
 		savedTodos.push(tempTodo);
-	console.log(savedTodos);
+	// console.log(savedTodos);
 	} else {
 		alert(`Ko'proq yozing!`)
 	}
@@ -65,6 +65,11 @@ elTodos.addEventListener('click', (evt) => {
 			}
 		});
 
-		console.log(foundTodo)
+		var isExistTodo = savedTodos.findIndex((isExistTodo) => {
+			return isExistTodo == foundTodo;
+		});
+
+		savedTodos.splice(isExistTodo, 1);
+		renderTodos(savedTodos);
 	}
 });
