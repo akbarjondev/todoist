@@ -25,7 +25,11 @@ img {
   color: #ffffff;
 }
 
-.is-done {
+.js-todo__check {
+  order: -1;
+}
+
+.is-done .js-todo__text {
   text-decoration: line-through;
   opacity: 0.5;
 }
