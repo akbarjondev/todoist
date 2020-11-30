@@ -71,8 +71,10 @@ elTodos.addEventListener('click', (evt) => {
 	// remove todo
 	if(evt.target.matches('.js-todo__remove')) {
 		var foundTodo = savedTodos.find((todo) => {
-			if(todo.id === evt.target.dataset.id) {
-				return todo;
+			if(todo !== null) {
+				if(todo.id === evt.target.dataset.id) {
+					return todo;
+				}
 			}
 		});
 
@@ -89,14 +91,16 @@ elTodos.addEventListener('click', (evt) => {
 	// done todo
 	if(evt.target.matches('.js-todo__check')) {
 		savedTodos.find((todo) => {
-			if(todo.id == evt.target.previousElementSibling.dataset.id) {
+			if(todo !== null) {
+				if(todo.id == evt.target.previousElementSibling.dataset.id) {
 
-				evt.target.closest('.js-todo').classList.toggle('is-done');
-				todo.isCompleted ? todo.isCompleted = false : todo.isCompleted = true;
+					evt.target.closest('.js-todo').classList.toggle('is-done');
+					todo.isCompleted ? todo.isCompleted = false : todo.isCompleted = true;
 
-				// save Updated todos
-				localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
-			}
+					// save Updated todos
+					localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
+				}
+			}			
 		});
 	}
 });
