@@ -34,11 +34,16 @@ img {
   opacity: 0.5;
 }
 
+.custom-checkbox {
+  width: auto;
+}
+
 .js-todo__remove {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.js-todo__remove:hover {
+.js-todo__remove:hover, 
+.js-todo__remove:focus {
   opacity: 1;
 }
