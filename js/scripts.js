@@ -85,7 +85,6 @@ elTodos.addEventListener('click', (evt) => {
 	if(evt.target.matches('.js-todo__check')) {
 		savedTodos.find((todo) => {
 			if(todo.id == evt.target.previousElementSibling.dataset.id) {
-				console.log(todo.id, evt.target.previousElementSibling.dataset.id);
 
 				evt.target.closest('.js-todo').classList.toggle('is-done');
 				todo.isCompleted ? todo.isCompleted = false : todo.isCompleted = true;

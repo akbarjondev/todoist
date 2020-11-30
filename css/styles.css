@@ -33,3 +33,12 @@ img {
   text-decoration: line-through;
   opacity: 0.5;
 }
+
+.js-todo__remove {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.js-todo__remove:hover {
+  opacity: 1;
+}
