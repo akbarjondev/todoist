@@ -43,7 +43,11 @@ var renderTodos = function(todosArray) {
 	elTodos.innerHTML = '';
 	var newFragmentBox = document.createDocumentFragment();
 
-	todosArray.forEach(function(todo) {
+	for(var todo of todosArray) {
+		if(!todo) {
+			continue;
+		}
+
 		var newTodoTemplate = elTemplateTodo.cloneNode(true);
 
 		newTodoTemplate.querySelector('.js-todo__text').textContent = todo.todo;
@@ -54,8 +58,8 @@ var renderTodos = function(todosArray) {
 			newTodoTemplate.querySelector('.js-todo__check').checked = true;
 		}
 
-		newFragmentBox.append(newTodoTemplate);		
-	});
+		newFragmentBox.append(newTodoTemplate);
+	}
 
 	elTodos.append(newFragmentBox);
 }
@@ -76,7 +80,8 @@ elTodos.addEventListener('click', (evt) => {
 			return isExistTodo == foundTodo;
 		});
 
-		savedTodos.splice(isExistTodo, 1);
+		// savedTodos.splice(isExistTodo, 1);
+		delete savedTodos[isExistTodo];
 		localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
 		renderTodos(savedTodos);
 	}
