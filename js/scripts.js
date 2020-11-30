@@ -12,11 +12,14 @@ var elTemplateTodo = $_('#todo-template').content;
 elForm.addEventListener('submit', (evt) => {
 	evt.preventDefault();
 
-  var newId =	savedTodos[savedTodos.length - 1];
-  
+  var newId = 0;
+  savedTodos.forEach((todo) => {
+  	newId++;
+  });
+
 	if(elTodoInput.value.length > 5) {
 		var tempTodo = {
-			id: (Number(newId.id) + 1).toString(),
+			id: newId.toString(),
 			todo: elTodoInput.value,
 			isCompleted: false
 		};
@@ -74,14 +77,17 @@ elTodos.addEventListener('click', (evt) => {
 		});
 
 		savedTodos.splice(isExistTodo, 1);
+		localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
 		renderTodos(savedTodos);
 	}
 
 	// done todo
 	if(evt.target.matches('.js-todo__check')) {
-		evt.target.closest('.js-todo').classList.toggle('is-done');
 		savedTodos.find((todo) => {
 			if(todo.id == evt.target.previousElementSibling.dataset.id) {
+				console.log(todo.id, evt.target.previousElementSibling.dataset.id);
+
+				evt.target.closest('.js-todo').classList.toggle('is-done');
 				todo.isCompleted ? todo.isCompleted = false : todo.isCompleted = true;
 
 				// save Updated todos
