@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<div class="nav bg-orange-self p-4 rounded mt-2">
-			<h1 class="h3 text-white mb-0 font-weight-bold">Todoist</h1>
+			<a href="https://todoistuz.netlify.app/" class="h3 font-weight-bold text-white mb-0">Todoist</a>
 		</div> <!-- End of nav -->
 
 		<form class="form form-inline mt-3 flex-nowrap" method="POST" action="https://echo.htmlacademy.ru">
@@ -19,21 +19,43 @@
 			<button class="btn btn-orange-self ml-3" type="submit">Add Task</button>
 		</form> <!-- End of form -->
 
-		<div class="todos-wrapper d-flex justify-content-center">
-			<ul class="list-group mt-3 w-50  font-weight-normal text-body js-todos">
+		<div class="align-items-center d-flex flex-column">
+			<div class="todos-wrapper d-flex align-items-stretch flex-column w-50">
+				<ul class="list-group mt-3 font-weight-normal text-body js-todos">
 
-			</ul> <!-- End of todo list -->
-		</div><!-- End of todos-wrapper -->
+				</ul> <!-- End of todo list -->
+				<div class="todo-tab d-flex align-items-center rounded bg-light p-2 border">
+					<div class="todo-tab__counter text-secondary flex-grow-1"><span class="todo-tab__counter-number">0</span> items left</div>
+					<button class="btn btn-outline-secondary btn-sm" type="button">All</button>
+					<button class="btn btn-outline-secondary btn-sm mx-2" type="button">Active</button>
+					<button class="btn btn-outline-secondary btn-sm" type="button">Completed</button>
+				</div>
+			</div><!-- End of todos-wrapper -->
+		</div>
 	</div><!-- End of container -->
 
 	<template id="todo-template">
 		<li class="list-group-item js-todo d-flex align-items-center">
-	  	<span class="js-todo__text flex-grow-1 text-truncate mx-2">Lorem ipsum, dolor sit amet con</span>
+	  	<span class="js-todo__text flex-grow-1 text-truncate mx-2"></span>
 	  	<button class="btn btn-orange-self btn-sm js-todo__remove" type="button">X</button>
 	    <input class="custom-checkbox form-control js-todo__check" type="checkbox" aria-label="Checkbox for following text input">
 	  </li>
 	</template><!-- End of #todo-template -->
-	
+
+	<!-- MODAL -->
+	<div class="self-modal bg-white mt-3 border rounded p-3 w-50">
+		<div class="self-modal__top d-flex justify-content-end">
+			<button class="btn btn-outline-secondary btn-sm" type="button" aria-label="Close modal">X</button>
+		</div><!-- End of self-modal__top -->
+
+		<div class="self-modal__body my-3 font-weight-bold">Are you shure?</div>
+		
+		<button class="self-modal__yes btn btn-danger btn-sm" type="button" aria-label="Say yes to delete todo">Yes</button>
+		<button class="self-modal__no btn btn-success btn-sm" type="button" aria-label="Say no to delete todo">No</button>
+	</div><!-- End of self-modal -->
+	<span class="self-modal-curtain"></span>
+	<!-- MODAL END -->
+
 	<script src="js/utils.js"></script>
 	<script src="js/scripts.js"></script>
 </body>
