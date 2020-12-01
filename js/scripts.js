@@ -4,9 +4,28 @@ var savedTodos = JSON.parse(localStorage.getItem('savedTodos')) || [];
 var elForm = $_('.form');
 var elTodoInput = $_('.js-input', elForm);
 var elTodoCheck = $_('.js-todo__check', elForm);
+var elTodosCounter = $_('.todo-tab__counter-number');
 
 var elTodos = $_('.js-todos');
 var elTemplateTodo = $_('#todo-template').content;
+
+var elModal = $_('.self-modal');
+var elModalYesButton = $_('.self-modal__yes', elModal);
+var elModalNoButton = $_('.self-modal__no', elModal);
+var elModalCurtain = $_('.self-modal-curtain');
+
+// count Todos
+var countTodos = function(array) {
+	var indexOfTodos = 0;
+	array.forEach((todo) => {
+		if(Boolean(todo)) {
+			if(!todo.isCompleted) {
+				indexOfTodos += 1;
+			}
+		}
+	});
+	elTodosCounter.textContent = indexOfTodos;
+}
 
 // listen form submit
 elForm.addEventListener('submit', (evt) => {
@@ -62,6 +81,7 @@ var renderTodos = function(todosArray) {
 	}
 
 	elTodos.append(newFragmentBox);
+	countTodos(todosArray);
 }
 
 renderTodos(savedTodos);
@@ -71,36 +91,71 @@ elTodos.addEventListener('click', (evt) => {
 	// remove todo
 	if(evt.target.matches('.js-todo__remove')) {
 		var foundTodo = savedTodos.find((todo) => {
-			if(todo !== null) {
+			if(Boolean(todo)) {
 				if(todo.id === evt.target.dataset.id) {
 					return todo;
 				}
 			}
 		});
 
-		var isExistTodo = savedTodos.findIndex((isExistTodo) => {
-			return isExistTodo == foundTodo;
+		// first pop up modal then delete
+		elModal.classList.add('self-modal--open');
+
+		// delete todo
+		var deleteTodo = function() {
+			var isExistTodo = savedTodos.findIndex((isExistTodo) => {
+				return isExistTodo == foundTodo;
+			});
+
+			// delete current todo from array but array keeps it's index
+			delete savedTodos[isExistTodo];
+			localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
+			
+			// close modal after deleting todo
+			elModal.classList.remove('self-modal--open');
+			
+			renderTodos(savedTodos);
+		}
+
+		// works when Escape keyboard is pressed
+		document.body.addEventListener('keyup', (evt) => {
+			if(evt.keyCode === 27) {
+				elModalYesButton.removeEventListener('click', deleteTodo);
+				elModal.classList.remove('self-modal--open');
+			}
 		});
 
-		// delete current todo from array but array keeps it's index
-		delete savedTodos[isExistTodo];
-		localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
-		renderTodos(savedTodos);
+		// works when black curtain is pressed
+		elModalCurtain.addEventListener('click', () => {
+			elModalYesButton.removeEventListener('click', deleteTodo);
+			elModal.classList.remove('self-modal--open');
+		});
+
+		// delete when YES button is pressed
+		elModalYesButton.addEventListener('click', deleteTodo);
+
+		// delete when NO button is pressed
+		elModalNoButton.addEventListener('click', (evt) => {
+			elModalYesButton.removeEventListener('click', deleteTodo);
+			elModal.classList.remove('self-modal--open');
+		});
 	}
 
 	// done todo
 	if(evt.target.matches('.js-todo__check')) {
 		savedTodos.find((todo) => {
-			if(todo !== null) {
+			if(Boolean(todo)) {
 				if(todo.id == evt.target.previousElementSibling.dataset.id) {
 
 					evt.target.closest('.js-todo').classList.toggle('is-done');
-					todo.isCompleted ? todo.isCompleted = false : todo.isCompleted = true;
+					todo.isCompleted = !todo.isCompleted;
 
 					// save Updated todos
 					localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
 				}
 			}			
 		});
+
+		renderTodos(savedTodos);
 	}
 });
