@@ -1,22 +1,33 @@
 // global variables
 var savedTodos = JSON.parse(localStorage.getItem('savedTodos')) || [];
 
+// form
 var elForm = $_('.form');
 var elTodoInput = $_('.js-input', elForm);
 var elTodoCheck = $_('.js-todo__check', elForm);
+
+// counter
 var elTodosCounter = $_('.todo-tab__counter-number');
 
+// todos
 var elTodos = $_('.js-todos');
 var elTemplateTodo = $_('#todo-template').content;
 
+// modal
 var elModal = $_('.self-modal');
 var elModalYesButton = $_('.self-modal__yes', elModal);
 var elModalNoButton = $_('.self-modal__no', elModal);
 var elModalCurtain = $_('.self-modal-curtain');
 
+// sort buttons
+var elButtonAll = $_('.js-all');
+var elButtonActive = $_('.js-active');
+var elButtonCompleted = $_('.js-completed');
+
 // count Todos
 var countTodos = function(array) {
 	var indexOfTodos = 0;
+	
 	array.forEach((todo) => {
 		if(Boolean(todo)) {
 			if(!todo.isCompleted) {
@@ -24,10 +35,11 @@ var countTodos = function(array) {
 			}
 		}
 	});
+
 	elTodosCounter.textContent = indexOfTodos;
 }
 
-// listen form submit
+// listen form submit action
 elForm.addEventListener('submit', (evt) => {
 	evt.preventDefault();
 
@@ -86,6 +98,7 @@ var renderTodos = function(todosArray) {
 
 renderTodos(savedTodos);
 
+
 // event delegatin, listen to todos wrapper
 elTodos.addEventListener('click', (evt) => {
 	// remove todo
@@ -98,10 +111,10 @@ elTodos.addEventListener('click', (evt) => {
 			}
 		});
 
-		// first pop up modal then delete
+		// modal opener
 		elModal.classList.add('self-modal--open');
 
-		// delete todo
+		// deletes todo
 		var deleteTodo = function() {
 			var isExistTodo = savedTodos.findIndex((isExistTodo) => {
 				return isExistTodo == foundTodo;
@@ -125,20 +138,20 @@ elTodos.addEventListener('click', (evt) => {
 			}
 		});
 
-		// works when black curtain is pressed
+		// cancel deleting when black curtain will be pressed
 		elModalCurtain.addEventListener('click', () => {
+			elModalYesButton.removeEventListener('click', deleteTodo);
+			elModal.classList.remove('self-modal--open');
+		});
+
+		// cancel deleting when NO button will be pressed
+		elModalNoButton.addEventListener('click', (evt) => {
 			elModalYesButton.removeEventListener('click', deleteTodo);
 			elModal.classList.remove('self-modal--open');
 		});
 
 		// delete when YES button is pressed
 		elModalYesButton.addEventListener('click', deleteTodo);
-
-		// delete when NO button is pressed
-		elModalNoButton.addEventListener('click', (evt) => {
-			elModalYesButton.removeEventListener('click', deleteTodo);
-			elModal.classList.remove('self-modal--open');
-		});
 	}
 
 	// done todo
