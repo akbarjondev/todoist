@@ -27,7 +27,7 @@ elForm.addEventListener('submit', (evt) => {
 		// push the todo to the savedTodos
 		savedTodos.push(tempTodo);
 	} else {
-		alert(`Ko'proq yozing!`)
+		alert(`Ko'proq yozing!`);
 	}
 
 	localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
@@ -82,7 +82,7 @@ elTodos.addEventListener('click', (evt) => {
 			return isExistTodo == foundTodo;
 		});
 
-		// savedTodos.splice(isExistTodo, 1);
+		// delete current todo from array but array keeps it's index
 		delete savedTodos[isExistTodo];
 		localStorage.setItem('savedTodos', JSON.stringify(savedTodos));
 		renderTodos(savedTodos);
